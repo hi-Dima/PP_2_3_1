@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
+
+  <label for="name"> Edit Name: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+
+  <br><br/>
+
+  <label for="email"> Edit email: </label>
+  <input type="text" th:field="*{email}" id="email">
+
+  <br><br/>
+
+  <input type="submit" value="Edit">
+</form>
+
+</body>
+</html>
