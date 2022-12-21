@@ -27,13 +27,13 @@ public class UserServiceImpl  implements UserService{
     }
 
     @Override
-    public User showUser(int id) {
-        return userDao.showUser(id);
+    public User userInfo(int id) {
+        return userDao.userInfo(id);
     }
     @Transactional
     @Override
-    public void updateUser(int id, User user) {
-        userDao.updateUser(id, user);
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
     @Transactional
     @Override

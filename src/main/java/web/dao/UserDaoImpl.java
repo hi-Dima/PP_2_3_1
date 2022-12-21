@@ -5,6 +5,7 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 // DAO класс. С помощью entityManager можем выполянть операции с БД
 @Repository
@@ -23,23 +24,19 @@ public class UserDaoImpl  implements UserDao{
     }
 
     @Override
-    public User showUser(int id) {
+    public User userInfo(int id) {
         return entityManager.find(User.class, id);
     }
 
     @Override
-    public void updateUser(int id, User user) {
-        User userToUpdate = entityManager.find(User.class, id);
-        entityManager.detach(userToUpdate);
-        userToUpdate.setName(user.getName());
-        userToUpdate.setEmail(user.getEmail());
-        entityManager.merge(userToUpdate);
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 
     @Override
     public void deleteUser(int id) {
-        entityManager.remove(entityManager.find(User.class, id));
+      Query query = entityManager.createQuery("delete from User user where user.id = :id");
+      query.setParameter("id", id);
+      query.executeUpdate();
     }
-
-
 }
