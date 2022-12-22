@@ -52,24 +52,24 @@ public class UserController {
     // edit/delete (userInfo.html)
     // Если мы нажмен edit, то сработает данный метод контроллера, который действует аналогично методу выше,
     // но возвращает нас к edit.html
-    @GetMapping("/id/edit")
-    public String getViewForEditUser(Model model, @RequestParam("id") int id) {
+    @GetMapping("/edit")
+    public String getViewForEditUser(Model model, @RequestParam("edit") int id) {
         model.addAttribute("user", userService.userInfo(id));
 
         return "edit";
     }
-    // Данный метод срабатывает, когда мы на страничке с URL: users/{id}/edit нажимаем  кнопку "edit".
-    // В файле edit.html к этой конпке "привязан" соответсвующий  patch метод.
-    @PostMapping("/edit/id")
+    // Данный метод срабатывает, когда мы на страничке с URL: users/edit нажимаем  кнопку "edit".
+    // В файле edit.html к этой конпке "привязан" соответсвующий  post (patch) метод.
+    @PostMapping("/edit")
     public String updateUser(@ModelAttribute("user") User user ) {
         userService.updateUser(user);
         return "redirect:/users";
     }
     // страничка, которая открывается, после перехода по ссылке с именем пользователя содержит 2 конпки:
     // edit/delete
-    // В файле userInfo.html к кнопке delete "привязан" соответсвующий  delete метод.
-    @PostMapping("/id")
-    public String deleteUser(@RequestParam("id") int id) {
+    // В файле userInfo.html к кнопке delete "привязан" соответсвующий  post (delete) метод.
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("delete") int id) {
         userService.deleteUser(id);
         return "redirect:/users";
     }
